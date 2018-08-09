@@ -1,0 +1,13 @@
+#!/bin/bash
+## Script to start common apps, and start sway.
+## Author: Andrew Grytsenko
+
+# export SWAY_CURSOR_THEME=Adwaita
+export SWAY_CURSOR_SIZE=64
+
+export XKB_DEFAULT_LAYOUT=us,ru,us
+export XKB_DEFAULT_VARIANT="dvp,"
+export XKB_DEFAULT_MODEL=kinesis
+export XKB_DEFAULT_OPTIONS="grp:alt_shift_toggle,grp_led:scroll"
+
+exec dbus-launch --sh-syntax --exit-with-session /usr/local/bin/sway 2>~/.swaysession-errors

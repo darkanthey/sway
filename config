@@ -1,0 +1,333 @@
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+set $term_backup urxvt
+set $term alacritty
+set $menu rofi
+
+# colors
+set $bg-color            #2f343f
+set $inactive-bg-color   #3d4351
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+# Font for window titles. Will also be used by the bar unless a different font is used in the bar {} block below.
+set $default_font pango:Hack 10
+font $default_font
+
+set $sway_path ~/.config/sway
+
+# Background image config
+set $images ~/Pictures
+set $wallpapers ~/Pictures/Wallpapers/
+set $lock_image ~/Pictures/Earth_From_Space.jpg
+set $print_path ~/Pictures/Screenshots/
+
+### Output configuration
+### You can get the names of your outputs by running: swaymsg -t get_outputs
+output eDP-1 resolution 2560x1440 position 0 0 bg $wallpapers/`background $wallpapers` fill
+output HDMI-A-2 resolution 3840x2160 position 2560 0 bg $wallpapers/`background $wallpapers` fill
+
+### Input configuration
+### You can get the names of your inputs by running: swaymsg -t get_inputs
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+    dwt enabled
+    tap enabled
+    natural_scroll disabled
+    middle_emulation disabled
+}
+
+input "1452:782:Vasyl_Nakvasiuk’s_Trackpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll disabled
+    middle_emulation disabled
+}
+
+### Key bindings. For read key name use 'xev'
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+    bindsym $mod+g exec $term_backup
+
+    # Start your launcher
+    bindsym $mod+d exec $menu -show combi
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right mouse button for dragging.
+    floating_modifier $mod
+
+    bindsym $mod+t focus output eDP-1
+    bindsym $mod+n focus output HDMI-A-2
+
+    bindsym $mod+Shift+t move workspace to output eDP-1
+    bindsym $mod+Shift+n move workspace to output HDMI-A-2
+
+    workspace_auto_back_and_forth yes
+
+    # Make the focus follows the mouse
+    focus_follows_mouse yes
+
+    # Toggle bar visibility
+    bindsym $mod+b bar mode toggle
+
+    # Lockscreen
+    bindsym $mod+Shift+x exec swaylock -c 333333 -s fill -i $lock_image
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    bindsym $mod+Shift+c reload
+    bindsym $mod+Shift+r restart
+    bindsym $mod+Shift+z exit
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    set $ws1 1: >_
+    set $ws2 2: web
+    set $ws3 3: emacs
+    set $ws4 4: chat
+    set $ws5 5: 5
+    set $ws6 6: 6
+    set $ws7 7: 7
+    set $ws8 8: 8
+    set $ws9 9: 9
+    set $ws0 10: backup
+
+    bindsym $mod+Tab workspace next
+    bindsym $mod+Shift+Tab workspace prev
+
+    # Switch to workspace
+    bindsym $mod+ampersand workspace $ws1
+    bindsym $mod+bracketleft workspace $ws2
+    bindsym $mod+braceleft workspace $ws3
+    bindsym $mod+braceright workspace $ws4
+    bindsym $mod+parenleft workspace $ws5
+    bindsym $mod+equal workspace $ws6
+    bindsym $mod+asterisk workspace $ws7
+    bindsym $mod+parenright workspace $ws8
+    bindsym $mod+plus workspace $ws9
+    bindsym $mod+bracketright workspace $ws0
+
+    bindsym $mod+F1 workspace $ws1
+    bindsym $mod+F2 workspace $ws2
+    bindsym $mod+F3 workspace $ws3
+    bindsym $mod+F4 workspace $ws4
+    bindsym $mod+F5 workspace $ws5
+    bindsym $mod+F6 workspace $ws6
+    bindsym $mod+F7 workspace $ws7
+    bindsym $mod+F8 workspace $ws8
+    bindsym $mod+F9 workspace $ws9
+    bindsym $mod+F10 workspace $ws0
+
+    # Move focused container to workspace
+    bindsym $mod+Shift+ampersand move container to workspace $ws1
+    bindsym $mod+Shift+bracketleft move container to workspace $ws2
+    bindsym $mod+Shift+braceleft move container to workspace $ws3
+    bindsym $mod+Shift+braceright move container to workspace $ws4
+    bindsym $mod+Shift+parenleft move container to workspace $ws5
+    bindsym $mod+Shift+equal move container to workspace $ws6
+    bindsym $mod+Shift+asterisk move container to workspace $ws7
+    bindsym $mod+Shift+parenright move container to workspace $ws8
+    bindsym $mod+Shift+plus move container to workspace $ws9
+    bindsym $mod+Shift+bracketright move container to workspace $ws0
+
+    bindsym $mod+Shift+F1 move container to workspace $ws1
+    bindsym $mod+Shift+F2 move container to workspace $ws2
+    bindsym $mod+Shift+F3 move container to workspace $ws3
+    bindsym $mod+Shift+F4 move container to workspace $ws4
+    bindsym $mod+Shift+F5 move container to workspace $ws5
+    bindsym $mod+Shift+F6 move container to workspace $ws6
+    bindsym $mod+Shift+F7 move container to workspace $ws7
+    bindsym $mod+Shift+F8 move container to workspace $ws8
+    bindsym $mod+Shift+F9 move container to workspace $ws9
+    bindsym $mod+Shift+F10 move container to workspace $ws0
+
+    # Move focused workspace
+    bindsym $mod+control+Left move workspace to output left
+    bindsym $mod+control+Down move workspace to output down
+    bindsym $mod+control+Up move workspace to output up
+    bindsym $mod+control+Right move workspace to output right
+
+    # Assign app to a workspace to find the class use xprop
+    assign [class="Google-chrome-unstable"] $ws2
+    assign [class="Remacs"] $ws3
+    assign [class="Firefox"] $ws7
+
+    for_window [class="Rofi"] floating enable
+    #for_window [class="Google-chrome-unstable", title="Google Hangouts – darkanthey@gmail.com"] floating enable
+
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus
+    bindsym $mod+h splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    # Change layouts with mod+;,.
+    bindsym $mod+semicolon layout stacking
+    bindsym $mod+comma layout tabbed
+    bindsym $mod+period layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    bindsym $left resize shrink width 10 px or 10 ppt
+    bindsym $down resize grow height 10 px or 10 ppt
+    bindsym $up resize shrink height 10 px or 10 ppt
+    bindsym $right resize grow width 10 px or 10 ppt
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Window colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #00ff00        #00ff00
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00        #00ff00
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00        #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00        #00ff00
+
+hide_edge_borders both
+#new_window none
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+  position top
+  #tray_output all
+  #tray_padding 2
+  #icon_theme Adwaita
+
+  pango_markup enabled
+
+  font $default_font
+  strip_workspace_numbers yes
+
+  status_command i3status-rs $sway_path/bar/status.toml
+  colors {
+      background $bg-color
+      separator #757575
+        #                  border             background         text
+        focused_workspace  $bg-color          $bg-color          $text-color
+        inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+        urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+  }
+}
+
+# Printscreen / screenshoot
+## Print
+bindsym Print exec scrot -e 'mv $f $print_path'
+bindsym --release control+Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+
+## Print selected area
+bindsym --release Shift+Print exec scrot -s -e 'mv $f $print_path'
+bindsym --release control+Shift+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
+
+## Print current window
+bindsym --release $mod+Print exec scrot -u -e 'mv $f $print_path'
+bindsym --release control+$mod+Print exec scrot -u -e 'mv $f /tmp/ && gimp /tmp/$f'
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id $sway_path/bin/volume +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id $sway_path/bin/volume -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id $sway_path/bin/volume mute_toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec $sway_path/bin/backlight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec $sway_path/bin/backlight -dec 5 # decrease screen brightness
+
+# Screen color brightness
+set $DISPLAY $(xrandr --verbose | grep -Po "(\w+)\s(?=connected)(?=.*primary)")
+bindsym $mod+XF86MonBrightnessUp exec $sway_path/bin/color_brightness $DISPLAY -inc 0.05
+bindsym $mod+XF86MonBrightnessDown exec $sway_path/bin/color_brightness $DISPLAY -dec 0.05
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+set $MENU "[R]emacs | [G]oogle Chrome | [F]irefox | [G]enyMotion"
+bindsym $mod+Shift+d mode $MENU
+mode $MENU {
+  bindsym r exec remacsclient -nquc, mode "default"
+  bindsym g exec chrome_runner, mode "default"
+  bindsym f exec firefox, mode "default"
+  bindsym i exec intellij-idea/bin/idea.sh, mode "default"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+exec swayidle timeout 600 'swaylock -c 333333 -s fill -i $lock_image' timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -c 333333 -s fill -i $lock_image'
+exec --no-startup-id dunst
+exec --no-startup-id kbdd
+exec --no-startup-id dropbox
+exec --no-startup-id chrome_runner
+
+include /etc/sway/config.d/*

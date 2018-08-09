@@ -1,0 +1,7 @@
+#!/bin/bash
+while ! [ $(systemctl is-active --user chrome_ramdisk.service) == "active" ]
+do
+  sleep 1
+done
+
+google-chrome-unstable --disk-cache-dir=/tmp/chromecache --user-data-dir=/tmp/chromeuser --enable-native-gpu-memory-buffers --enable-features="CheckerImaging" &>/dev/null &
